@@ -1,4 +1,4 @@
-package com.blocksignature.utils;
+package com.example.utils;
 
 import com.sun.jna.Library;
 import com.sun.jna.Structure;

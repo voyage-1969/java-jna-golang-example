@@ -1,5 +1,6 @@
 package com.blocksignature.utils;
 
+import com.example.utils.Lib;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 import org.apache.commons.io.FileUtils;
@@ -10,7 +11,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 public class TestUtils {
-    public static com.blocksignature.utils.Lib LIB;
+    public static Lib LIB;
     private static final boolean isWin = System.getProperty("os.name").toLowerCase().contains("win");
     private static final String WIN_DLL = "test.dll";
     private static final String LINUX_SO = "test.so";
@@ -29,7 +30,7 @@ public class TestUtils {
                 }
                 //WIN10 环境DLL加载
                 NativeLibrary.addSearchPath(WIN_DLL, rootPath);
-                LIB = Native.load(WIN_DLL, com.blocksignature.utils.Lib.class);
+                LIB = Native.load(WIN_DLL, Lib.class);
             } else {
                 //LINUX 环境SO加载
                 String configFilePath = rootPath + File.separator + LINUX_SO;
@@ -39,7 +40,7 @@ public class TestUtils {
                     FileUtils.copyInputStreamToFile(Objects.requireNonNull(in), configFile);
                 }
                 NativeLibrary.addSearchPath(LINUX_SO, rootPath);
-                LIB = Native.load(LINUX_SO, com.blocksignature.utils.Lib.class);
+                LIB = Native.load(LINUX_SO, Lib.class);
             }
 
         } catch (Exception e) {
@@ -57,8 +58,8 @@ public class TestUtils {
     }
 
 
-    private static com.example.utils.Lib.GoString.ByValue toGoString(String str) {
-        com.blocksignature.utils.Lib.GoString.ByValue str3 = new com.blocksignature.utils.Lib.GoString.ByValue();
+    private static Lib.GoString.ByValue toGoString(String str) {
+        Lib.GoString.ByValue str3 = new Lib.GoString.ByValue();
         str3.p = str;
         str3.n = str3.p.length();
         return str3;
